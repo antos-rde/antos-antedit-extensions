@@ -6,8 +6,9 @@ html = """
 """
 
 class TerminalWrapper extends App.BaseExtension
-    constructor: (app) ->
-        super app
+    constructor: (parent) ->
+        super parent.app
+        @parent = parent
         this.newTerminal()
         
     newTerminal: () ->
@@ -120,6 +121,7 @@ class TerminalWrapper extends App.BaseExtension
         return unless @description
         @app.bottombar.removeTab(@description.domel)
         @description = undefined
+        @parent.remove(this)
 
 # define the extension
 class App.extensions.CodePadTerminal extends App.BaseExtension
@@ -137,7 +139,12 @@ class App.extensions.CodePadTerminal extends App.BaseExtension
     open: () ->
         return @notify __("Antunnel service is not available") unless window.Antunnel and Antunnel.tunnel
         return @notify __("xTerm library is not available") unless Terminal
-        @terminals.push(new TerminalWrapper(@app))
+        @terminals.push(new TerminalWrapper(this))
+    
+    remove: (instance) ->
+        index = @terminals.indexOf(instance)
+        return unless index > -1
+        @terminals.splice(index, 1)
     
     cleanup: () ->
         v.cleanup() for v in @terminals

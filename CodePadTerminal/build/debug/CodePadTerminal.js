@@ -7,8 +7,9 @@
   html = `<div data-id="codepad-terminal-container"></div>`;
 
   TerminalWrapper = class TerminalWrapper extends App.BaseExtension {
-    constructor(app) {
-      super(app);
+    constructor(parent) {
+      super(parent.app);
+      this.parent = parent;
       this.newTerminal();
     }
 
@@ -164,7 +165,8 @@
         return;
       }
       this.app.bottombar.removeTab(this.description.domel);
-      return this.description = void 0;
+      this.description = void 0;
+      return this.parent.remove(this);
     }
 
   };
@@ -187,7 +189,16 @@
       if (!Terminal) {
         return this.notify(__("xTerm library is not available"));
       }
-      return this.terminals.push(new TerminalWrapper(this.app));
+      return this.terminals.push(new TerminalWrapper(this));
+    }
+
+    remove(instance) {
+      var index;
+      index = this.terminals.indexOf(instance);
+      if (!(index > -1)) {
+        return;
+      }
+      return this.terminals.splice(index, 1);
     }
 
     cleanup() {
