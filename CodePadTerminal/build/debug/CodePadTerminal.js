@@ -73,6 +73,10 @@
 
     resizeContent(e) {
       var arr, ncol, nrow;
+      if ($(this.description.container).is(":hidden")) {
+        return;
+      }
+      console.log("resize terminal");
       this.fitAddon.fit();
       ncol = this.term.cols;
       nrow = this.term.rows;

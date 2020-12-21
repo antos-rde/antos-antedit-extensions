@@ -50,6 +50,8 @@ class TerminalWrapper extends App.BaseExtension
         @openSession()
     
     resizeContent: (e) ->
+        return if $(@description.container).is(":hidden")
+        console.log("resize terminal")
         @fitAddon.fit()
         ncol = @term.cols
         nrow = @term.rows
