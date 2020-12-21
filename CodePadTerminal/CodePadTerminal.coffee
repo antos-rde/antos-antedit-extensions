@@ -5,22 +5,12 @@ html = """
 <div data-id="codepad-terminal-container"></div>
 """
 
-# define the extension
-class App.extensions.CodePadTerminal extends App.BaseExtension
+class TerminalWrapper extends App.BaseExtension
     constructor: (app) ->
         super app
-    
-    dependencies: () ->
-        [
-            "pkg://xTerm/main.js",
-            "pkg://xTerm/main.css",
-            "pkg://Antunnel/main.js"
-        ]
-
-    open: () ->
-        return @notify __("Antunnel service is not available") unless window.Antunnel and Antunnel.tunnel
-        return @notify __("xTerm library is not available") unless Terminal
+        this.newTerminal()
         
+    newTerminal: () ->
         return @description.domel.selected = true if @description
         # create html element
         scheme = $.parseHTML(html)[0]
@@ -62,10 +52,12 @@ class App.extensions.CodePadTerminal extends App.BaseExtension
         ncol = @term.cols
         nrow = @term.rows
         return unless @sub
-        arr = new Uint8Array(8)
-        arr.set Antunnel.Msg.bytes_of(ncol), 0
-        arr.set Antunnel.Msg.bytes_of(nrow), 4
-        @sub.send Antunnel.Msg.CTRL, arr
+        try
+            arr = new Uint8Array(8)
+            arr.set Antunnel.Msg.bytes_of(ncol), 0
+            arr.set Antunnel.Msg.bytes_of(nrow), 4
+            @sub.send Antunnel.Msg.CTRL, arr
+        catch e
     
     mctxHandle: (data) ->
         switch data.id
@@ -127,3 +119,24 @@ class App.extensions.CodePadTerminal extends App.BaseExtension
         return unless @description
         @app.bottombar.removeTab(@description.domel)
         @description = undefined
+
+# define the extension
+class App.extensions.CodePadTerminal extends App.BaseExtension
+    constructor: (app) ->
+        super app
+        @terminals = []
+    
+    dependencies: () ->
+        [
+            "pkg://xTerm/main.js",
+            "pkg://xTerm/main.css",
+            "pkg://Antunnel/main.js"
+        ]
+
+    open: () ->
+        return @notify __("Antunnel service is not available") unless window.Antunnel and Antunnel.tunnel
+        return @notify __("xTerm library is not available") unless Terminal
+        @terminals.push(new TerminalWrapper(@app))
+    
+    cleanup: () ->
+        v.cleanup() for v in @terminals

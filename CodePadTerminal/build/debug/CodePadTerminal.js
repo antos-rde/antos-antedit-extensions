@@ -1,29 +1,19 @@
 (function() {
   // import the CodePad application module
-  var App, html;
+  var App, TerminalWrapper, html;
 
   App = this.OS.application.CodePad;
 
   html = `<div data-id="codepad-terminal-container"></div>`;
 
-  // define the extension
-  App.extensions.CodePadTerminal = class CodePadTerminal extends App.BaseExtension {
+  TerminalWrapper = class TerminalWrapper extends App.BaseExtension {
     constructor(app) {
       super(app);
+      this.newTerminal();
     }
 
-    dependencies() {
-      return ["pkg://xTerm/main.js", "pkg://xTerm/main.css", "pkg://Antunnel/main.js"];
-    }
-
-    open() {
+    newTerminal() {
       var scheme;
-      if (!(window.Antunnel && Antunnel.tunnel)) {
-        return this.notify(__("Antunnel service is not available"));
-      }
-      if (!Terminal) {
-        return this.notify(__("xTerm library is not available"));
-      }
       if (this.description) {
         return this.description.domel.selected = true;
       }
@@ -85,10 +75,14 @@
       if (!this.sub) {
         return;
       }
-      arr = new Uint8Array(8);
-      arr.set(Antunnel.Msg.bytes_of(ncol), 0);
-      arr.set(Antunnel.Msg.bytes_of(nrow), 4);
-      return this.sub.send(Antunnel.Msg.CTRL, arr);
+      try {
+        arr = new Uint8Array(8);
+        arr.set(Antunnel.Msg.bytes_of(ncol), 0);
+        arr.set(Antunnel.Msg.bytes_of(nrow), 4);
+        return this.sub.send(Antunnel.Msg.CTRL, arr);
+      } catch (error) {
+        e = error;
+      }
     }
 
     mctxHandle(data) {
@@ -168,6 +162,40 @@
       }
       this.app.bottombar.removeTab(this.description.domel);
       return this.description = void 0;
+    }
+
+  };
+
+  // define the extension
+  App.extensions.CodePadTerminal = class CodePadTerminal extends App.BaseExtension {
+    constructor(app) {
+      super(app);
+      this.terminals = [];
+    }
+
+    dependencies() {
+      return ["pkg://xTerm/main.js", "pkg://xTerm/main.css", "pkg://Antunnel/main.js"];
+    }
+
+    open() {
+      if (!(window.Antunnel && Antunnel.tunnel)) {
+        return this.notify(__("Antunnel service is not available"));
+      }
+      if (!Terminal) {
+        return this.notify(__("xTerm library is not available"));
+      }
+      return this.terminals.push(new TerminalWrapper(this.app));
+    }
+
+    cleanup() {
+      var i, len, ref, results, v;
+      ref = this.terminals;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        v = ref[i];
+        results.push(v.cleanup());
+      }
+      return results;
     }
 
   };
