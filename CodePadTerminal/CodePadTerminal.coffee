@@ -94,13 +94,12 @@ class TerminalWrapper extends App.BaseExtension
         @term.focus()
         @sub = new Antunnel.Subscriber("vterm")
         @sub.onopen = () =>
-            console.log("Subscribed")
-            @resizeContent (($ @mterm).width()) ,  (($ @mterm).height())
+            @resizeContent()
             @term.focus()
         
         @sub.onerror = (e) =>
             @error __("Unable to connect to: vterm"), e
-            @sub = undefined
+            # @sub = undefined
             @cleanup()
 
         @sub.onmessage =  (e) =>

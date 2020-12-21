@@ -133,13 +133,12 @@
       this.term.focus();
       this.sub = new Antunnel.Subscriber("vterm");
       this.sub.onopen = () => {
-        console.log("Subscribed");
-        this.resizeContent(($(this.mterm)).width(), ($(this.mterm)).height());
+        this.resizeContent();
         return this.term.focus();
       };
       this.sub.onerror = (e) => {
         this.error(__("Unable to connect to: vterm"), e);
-        this.sub = void 0;
+        // @sub = undefined
         return this.cleanup();
       };
       this.sub.onmessage = (e) => {
