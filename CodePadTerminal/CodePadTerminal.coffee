@@ -45,6 +45,7 @@ class TerminalWrapper extends App.BaseExtension
         @resizefn = (e) =>
             @resizeContent()
         @app.on "resize", @resizefn
+        $(scheme).on "focus", (e) => @term.focus()
         @openSession()
     
     resizeContent: (e) ->

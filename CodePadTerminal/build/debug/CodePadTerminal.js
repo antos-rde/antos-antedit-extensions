@@ -64,6 +64,9 @@
         return this.resizeContent();
       };
       this.app.on("resize", this.resizefn);
+      $(scheme).on("focus", (e) => {
+        return this.term.focus();
+      });
       return this.openSession();
     }
 
