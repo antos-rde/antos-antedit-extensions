@@ -1,0 +1,11 @@
+{
+    "name": "CodePadTerminal",
+    "text": "CodePad Terminal",
+    "version": "0.0.1-a",
+    "actions": [
+        {
+            "text": "__(Open terminal)",
+            "name": "open"
+        }
+    ]
+}
