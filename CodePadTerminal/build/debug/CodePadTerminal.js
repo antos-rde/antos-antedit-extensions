@@ -4,7 +4,7 @@
 
   App = this.OS.application.CodePad;
 
-  html = `<div data-id="codepad-terminal-container"></div>`;
+  html = `<div></div>`;
 
   TerminalWrapper = class TerminalWrapper extends App.BaseExtension {
     constructor(parent) {

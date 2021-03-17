@@ -5,7 +5,8 @@
     "actions": [
         {
             "text": "__(Open terminal)",
-            "name": "open"
+            "name": "open",
+            "shortcut": "ALT-T"
         }
     ]
 }
