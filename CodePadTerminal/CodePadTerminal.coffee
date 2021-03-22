@@ -137,9 +137,23 @@ class App.extensions.CodePadTerminal extends App.BaseExtension
         ]
 
     open: () ->
-        return @notify __("Antunnel service is not available") unless window.Antunnel and Antunnel.tunnel
+        return @notify __("Antunnel service is not available") unless window.Antunnel
         return @notify __("xTerm library is not available") unless Terminal
-        @terminals.push(new TerminalWrapper(this))
+        if not Antunnel.tunnel
+            @app._gui.pushService("Antunnel/AntunnelService")
+            .then (d) =>
+                return unless @app.systemsetting.system.tunnel_uri
+                Antunnel.init(@app.systemsetting.system.tunnel_uri).then (t) =>
+                    @notify __("Tunnel now connected to the server at: {0}", @app.systemsetting.system.tunnel_uri)
+                    @terminals.push(new TerminalWrapper(this))
+                .catch (e) =>
+                    Antunnel.tunnel.close() if Antunnel.tunnel
+                    @error __("Unable to connect to the tunnel: {0}", e.toString()), e
+            .catch (e) =>
+                @error __("Unable to run Antunnel service: {0}",e.toString()), e
+                @quit()
+        else
+            @terminals.push(new TerminalWrapper(this))
     
     remove: (instance) ->
         index = @terminals.indexOf(instance)

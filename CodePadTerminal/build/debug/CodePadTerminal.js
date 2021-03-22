@@ -185,13 +185,33 @@
     }
 
     open() {
-      if (!(window.Antunnel && Antunnel.tunnel)) {
+      if (!window.Antunnel) {
         return this.notify(__("Antunnel service is not available"));
       }
       if (!Terminal) {
         return this.notify(__("xTerm library is not available"));
       }
-      return this.terminals.push(new TerminalWrapper(this));
+      if (!Antunnel.tunnel) {
+        return this.app._gui.pushService("Antunnel/AntunnelService").then((d) => {
+          if (!this.app.systemsetting.system.tunnel_uri) {
+            return;
+          }
+          return Antunnel.init(this.app.systemsetting.system.tunnel_uri).then((t) => {
+            this.notify(__("Tunnel now connected to the server at: {0}", this.app.systemsetting.system.tunnel_uri));
+            return this.terminals.push(new TerminalWrapper(this));
+          }).catch((e) => {
+            if (Antunnel.tunnel) {
+              Antunnel.tunnel.close();
+            }
+            return this.error(__("Unable to connect to the tunnel: {0}", e.toString()), e);
+          });
+        }).catch((e) => {
+          this.error(__("Unable to run Antunnel service: {0}", e.toString()), e);
+          return this.quit();
+        });
+      } else {
+        return this.terminals.push(new TerminalWrapper(this));
+      }
     }
 
     remove(instance) {
