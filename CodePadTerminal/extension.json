@@ -1,17 +1,12 @@
 {
-    "javascripts": [],
-    "coffees": ["CodePadTerminal.coffee"],
-    "copies": [],
-    "meta": {
-        "name": "CodePadTerminal",
-        "text": "CodePad Terminal",
-        "version": "0.0.1-a",
-        "actions" : [
-            {
-                "text": "__(Open terminal)",
-                "name": "open",
-                "shortcut": "ALT-T"
-            }
-        ]
-    }
+    "name": "AnteditTerminal",
+    "text": "Antedit Terminal",
+    "version": "0.0.2-a",
+    "actions" : [
+        {
+            "text": "__(Open terminal)",
+            "name": "open",
+            "shortcut": "ALT-T"
+        }
+    ]
 }

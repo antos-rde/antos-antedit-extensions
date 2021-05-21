@@ -1,8 +1,8 @@
 {
-    "name": "CodePadTerminal",
-    "text": "CodePad Terminal",
-    "version": "0.0.1-a",
-    "actions": [
+    "name": "AnteditTerminal",
+    "text": "Antedit Terminal",
+    "version": "0.0.2-a",
+    "actions" : [
         {
             "text": "__(Open terminal)",
             "name": "open",

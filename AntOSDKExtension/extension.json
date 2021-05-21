@@ -1,0 +1,43 @@
+{
+    "javascripts": ["AntOSDKExtension.js"],
+    "copies": ["tpl"],
+    "meta": {
+        "name": "AntOSDKExtension",
+        "text": "AntOSDK",
+        "version": "0.0.5-a",
+        "actions" : [
+            {
+                "text": "__(New AntOS package)",
+                "name": "create",
+                "shortcut": "CTRL-ALT-N"
+            },
+            {
+                "text": "__(Build a target)",
+                "name": "build",
+                "shortcut": "CTRL-ALT-B"
+            },
+            {
+                "text": "__(Build last target)",
+                "name": "build_last",
+                "shortcut": "CTRL-ALT-M"
+            },
+            {
+                "text": "__(Run AntOS package)",
+                "name": "run",
+                "shortcut": "CTRL-ALT-R"
+            },
+            {
+                "text": "__(Load AntOS dev packages)",
+                "name": "load_lib"
+            },
+            {
+                "text": "__(Load TypeScript delaration file)",
+                "name": "load_lib_from"
+            },
+            {
+                "text": "__(Generate build file from project.json)",
+                "name": "gen_build_from_project_file"
+            }
+        ]
+    }
+}

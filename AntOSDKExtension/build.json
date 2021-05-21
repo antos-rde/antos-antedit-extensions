@@ -1,0 +1,16 @@
+{
+    "targets":{
+        "release":{
+            "require": ["zip"],
+            "jobs": [ 
+                {
+                    "name":"zip-mk",
+                    "data":{
+                        "src": "build/debug",
+                        "dest": "build/release/AntOSDKExtension.zip"
+                    }
+                }
+            ]
+        }
+    }
+}
