@@ -1,0 +1,16 @@
+[
+    {
+        "name": "AntOSDKExtension",
+        "text": "AntOSDK",
+        "version": "0.0.5-a",
+        "description" : "Extension that support AntOSDK toolkit in Ant editor",
+        "download": ""
+    },
+    {
+        "name": "AnteditTerminal",
+        "text": "Antedit Terminal",
+        "version": "0.0.2-a",
+        "description" : "Integrated terminal emulator for Ant editor",
+        "download": ""
+    }
+]
