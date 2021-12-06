@@ -4,13 +4,13 @@
         "text": "AntOSDK",
         "version": "0.0.6-a",
         "description" : "Extension that support AntOSDK toolkit in Ant editor",
-        "download": "https://github.com/lxsang/antos-codepad-extensions/raw/master/AntOSDKExtension/build/release/AntOSDKExtension.zip"
+        "download": "https://raw.githubusercontent.com/lxsang/antos-antedit-extensions/master/AntOSDKExtension/build/release/AntOSDKExtension.zip"
     },
     {
         "name": "AnteditTerminal",
         "text": "Antedit Terminal",
         "version": "0.0.2-a",
         "description" : "Integrated terminal emulator for Ant editor",
-        "download": "https://github.com/lxsang/antos-codepad-extensions/raw/master/AnteditTerminal/build/release/AnteditTerminal.zip"
+        "download": "https://raw.githubusercontent.com/lxsang/antos-antedit-extensions/master/AnteditTerminal/build/release/AnteditTerminal.zip"
     }
 ]
