@@ -47,6 +47,10 @@
                   data: targets
                 });
                 this.last_target = target.text;
+                if(!options.root && this.app.currdir)
+                {
+                  options.root = this.app.currdir;
+                }
                 await this.app.load(this.sdk.batch([target.text], options));
               }
               catch(error)
@@ -98,6 +102,10 @@
           this.metadata("build.json")
             .then(async (options) => {
               try{
+                if(!options.root && this.app.currdir)
+                {
+                  options.root = this.app.currdir;
+                }
                 await this.app.load(this.sdk.batch([this.last_target], options));
               }
               catch(error)

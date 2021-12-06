@@ -4,7 +4,7 @@
     "meta": {
         "name": "AntOSDKExtension",
         "text": "AntOSDK",
-        "version": "0.0.5-a",
+        "version": "0.0.6-a",
         "actions" : [
             {
                 "text": "__(New AntOS package)",
