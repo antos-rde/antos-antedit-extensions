@@ -57,8 +57,8 @@ class TerminalWrapper extends App.EditorBaseExtension
         return unless @sub
         try
             arr = new Uint8Array(8)
-            arr.set Antunnel.Msg.bytes_of(ncol), 0
-            arr.set Antunnel.Msg.bytes_of(nrow), 4
+            arr.set Antunnel.Msg.bytes_of(ncol, 4), 0
+            arr.set Antunnel.Msg.bytes_of(nrow, 4), 4
             @sub.send Antunnel.Msg.CTRL, arr
         catch e
     
