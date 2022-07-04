@@ -35,7 +35,8 @@
             };
             this.app.bottombar.addTab(this.desc, true);
             this.graph = new OS.API.LibGitGraph({
-              target: div
+              target: div,
+              popup_height: 150
             });
             this.graph.on_open_diff = (files) => {
               this.app.openDiff(files);
