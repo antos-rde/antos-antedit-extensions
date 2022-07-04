@@ -1,0 +1,16 @@
+{
+    "javascripts": ["AnteditGitGraph.js"],
+    "copies": [],
+    "meta": {
+        "name": "AnteditGitGraph",
+        "text": "Git graph",
+        "version": "0.1.0-a",
+        "actions" : [
+            {
+                "text": "__(load)",
+                "name": "open",
+                "shortcut": "ALT-G"
+            }
+        ]
+    }
+}

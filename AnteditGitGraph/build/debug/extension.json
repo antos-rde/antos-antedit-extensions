@@ -1,0 +1,12 @@
+{
+    "name": "AnteditGitGraph",
+    "text": "Git graph",
+    "version": "0.0.1-a",
+    "actions": [
+        {
+            "text": "__(load)",
+            "name": "open",
+            "shortcut": "ALT-G"
+        }
+    ]
+}

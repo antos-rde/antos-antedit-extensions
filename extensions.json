@@ -12,5 +12,12 @@
         "version": "0.0.3-a",
         "description" : "Integrated terminal emulator for Ant editor",
         "download": "https://raw.githubusercontent.com/lxsang/antos-antedit-extensions/master/AnteditTerminal/build/release/AnteditTerminal.zip"
+    },
+    {
+        "name": "AnteditGitGraph",
+        "text": "Git graph",
+        "version": "0.1.0-a",
+        "description" : "Git repository visualization for Antedit",
+        "download": "https://raw.githubusercontent.com/lxsang/antos-antedit-extensions/master/AnteditGitGraph/build/release/AnteditGitGraph.zip"
     }
 ]
