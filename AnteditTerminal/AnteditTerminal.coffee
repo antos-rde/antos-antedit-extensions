@@ -23,8 +23,8 @@ class TerminalWrapper extends App.EditorBaseExtension
         @app.showBottomBar(true)
         @app.bottombar.addTab(@description, true)
         @term = new Terminal { cursorBlink: true, fontSize: 12 }
+        @fitAddon = new FitAddon.FitAddon()
         @term.loadAddon(@fitAddon)
-        @term.setOption('fontSize', '12')
         @term.open scheme
         @sub = undefined
         @term.onKey (d) =>
