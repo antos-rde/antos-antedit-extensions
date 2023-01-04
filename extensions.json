@@ -9,7 +9,7 @@
     {
         "name": "AnteditTerminal",
         "text": "Antedit Terminal",
-        "version": "0.0.3-a",
+        "version": "0.0.4-a",
         "description" : "Integrated terminal emulator for Ant editor",
         "download": "https://raw.githubusercontent.com/lxsang/antos-antedit-extensions/master/AnteditTerminal/build/release/AnteditTerminal.zip"
     },
