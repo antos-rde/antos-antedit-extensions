@@ -2,7 +2,7 @@
     {
         "name": "AntOSDKExtension",
         "text": "AntOSDK",
-        "version": "0.0.6-a",
+        "version": "0.0.7-a",
         "description" : "Extension that support AntOSDK toolkit in Ant editor",
         "download": "https://raw.githubusercontent.com/lxsang/antos-antedit-extensions/master/AntOSDKExtension/build/release/AntOSDKExtension.zip"
     },

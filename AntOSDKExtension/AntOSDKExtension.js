@@ -1,6 +1,7 @@
 (function() {
     // import the CodePad application module
     const App = this.OS.application.Antedit;
+    const SDK_URL = "https://ci.iohub.dev/public/antos-release/sdk";
     // define the extension
     App.extensions.AntOSDKExtension = class AntOSDKExtension extends App.EditorBaseExtension {
         constructor(app) {
@@ -59,12 +60,32 @@
             })
             .catch((e) => this.logger().error(__("Unable to read meta-data:{0}", e.stack)));
         }
-        load_lib(){
-          this.init();
-          this.load_d_ts([
-            "sdk://core/ts/jquery.d.ts",
-            "sdk://core/ts/antos.d.ts"
-          ]);
+        async load_lib(){
+          try{
+            this.init();
+            // fetch versions
+            const discovery = `${SDK_URL}/versions.txt`.asFileHandle();
+            const text = await discovery.read();
+            const list = text.split("\n")
+              .filter(e => e.trim() !== "")
+              .map((e) => {
+                return { text: e}
+              });
+            const selected = await this.app.openDialog("SelectionDialog", {
+              title: __("Select SDK version"),
+              data: list
+            });
+
+            const version = selected.text;
+            this.load_d_ts([
+              `${SDK_URL}/${version}/jquery.d.ts`,
+              `${SDK_URL}/${version}/antos.d.ts`
+            ]);
+          }
+          catch(e)
+          {
+            this.logger().error(__("Unable to load AntOS SDK:{0}", e.stack));
+          }
         }
 
         load_lib_from()
