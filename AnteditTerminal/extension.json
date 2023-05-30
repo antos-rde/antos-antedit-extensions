@@ -1,12 +1,16 @@
 {
-    "name": "AnteditTerminal",
-    "text": "Antedit Terminal",
-    "version": "0.0.5-a",
-    "actions" : [
-        {
-            "text": "__(Open terminal)",
-            "name": "open",
-            "shortcut": "ALT-T"
-        }
-    ]
+    "javascripts": ["build/debug/main.js"],
+    "copies": [],
+    "meta": {
+        "name": "AnteditTerminal",
+        "text": "Antedit Terminal",
+        "version": "0.0.6-a",
+        "actions" : [
+            {
+                "text": "__(Open terminal)",
+                "name": "open",
+                "shortcut": "ALT-T"
+            }
+        ]
+    }
 }

@@ -95,6 +95,9 @@ class TerminalWrapper extends App.EditorBaseExtension
         @sub.onopen = () =>
             @resizeContent()
             @term.focus()
+            # try to CD to the current working directory
+            return unless @app.currdir and @app.currdir.protocol is "home"
+            @sub.send Antunnel.Msg.DATA, new TextEncoder("utf-8").encode("cd ~/#{@app.currdir.genealogy.join("/")}\n")
         
         @sub.onerror = (e) =>
             @error __("Unable to connect to: vterm"), e
